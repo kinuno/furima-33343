@@ -7,7 +7,7 @@ RSpec.describe Item, type: :model do
 
   describe '商品出品機能' do
     context '商品出品できるとき' do
-      it "name、explanation、category_id, condition_id, fee_id, prefecture_id, delivery_days_id, price, imageが存在すれば登録できる" do
+      it 'name、explanation、category_id, condition_id, fee_id, prefecture_id, delivery_days_id, price, imageが存在すれば登録できる' do
         expect(@item).to be_valid
       end
     end
@@ -24,75 +24,72 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Name can't be blank")
       end
-      
+
       it 'explanationが空では登録できない' do
         @item.explanation = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Explanation can't be blank")
       end
-      
+
       it 'category情報がないと登録できない' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category Select")
+        expect(@item.errors.full_messages).to include('Category Select')
       end
-      
+
       it 'condition情報がないと登録できない' do
         @item.condition_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition Select")
+        expect(@item.errors.full_messages).to include('Condition Select')
       end
-      
+
       it '配送料負担の情報がないと登録できない' do
         @item.fee_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Fee Select")
+        expect(@item.errors.full_messages).to include('Fee Select')
       end
-      
+
       it '配送元地域の情報がないと登録できない' do
         @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture Select")
+        expect(@item.errors.full_messages).to include('Prefecture Select')
       end
-      
+
       it '配送までの日数についての情報がないと登録できない' do
         @item.delivery_days_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery days Select")
+        expect(@item.errors.full_messages).to include('Delivery days Select')
       end
-      
+
       it '価格の情報がないと登録できない' do
-        @item.price = ""
+        @item.price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Half-width number", "Price Out of setting range")
+        expect(@item.errors.full_messages).to include('Price Half-width number', 'Price Out of setting range')
       end
-      
+
       it '価格は半角数字でないと登録できない' do
-        @item.price = "３００"
+        @item.price = '３００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Half-width number", "Price Out of setting range")
+        expect(@item.errors.full_messages).to include('Price Half-width number', 'Price Out of setting range')
       end
 
       it '価格が300未満の場合登録できない' do
-        @item.price = "200"
+        @item.price = '200'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Out of setting range")
+        expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
 
       it '価格が10,000,000以上の場合登録できない' do
-        @item.price = "10000000"
+        @item.price = '10000000'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Out of setting range")
+        expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
 
-      it "ユーザーが紐付いていなければ投稿できない" do
+      it 'ユーザーが紐付いていなければ投稿できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
-
   end
-
-
 end
