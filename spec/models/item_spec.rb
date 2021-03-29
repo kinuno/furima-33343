@@ -13,31 +13,31 @@ RSpec.describe Item, type: :model do
     end
 
     context '商品出品できないとき' do
-      it 'imageが空では登録できない' do
+      it '商品画像がないと登録できない' do
         @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
 
-      it 'nameが空では登録できない' do
+      it '商品名が空では登録できない' do
         @item.name = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Name can't be blank")
       end
 
-      it 'explanationが空では登録できない' do
+      it '商品説明が空では登録できない' do
         @item.explanation = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Explanation can't be blank")
       end
 
-      it 'category情報がないと登録できない' do
+      it 'カテゴリー情報がないと登録できない' do
         @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Category Select')
       end
 
-      it 'condition情報がないと登録できない' do
+      it '商品状態についての情報がないと登録できない' do
         @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Condition Select')
@@ -74,7 +74,7 @@ RSpec.describe Item, type: :model do
       end
 
       it '価格が300未満の場合登録できない' do
-        @item.price = '200'
+        @item.price = 200
         @item.valid?
         expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
