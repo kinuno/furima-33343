@@ -67,8 +67,20 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Price Half-width number', 'Price Out of setting range')
       end
 
-      it '価格は半角数字でないと登録できない' do
+      it '価格は全角では登録できない' do
         @item.price = '３００'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price Half-width number', 'Price Out of setting range')
+      end
+
+      it '価格は半角英数混合では登録できない' do
+        @item.price = '1a1a1a'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price Half-width number', 'Price Out of setting range')
+      end
+
+      it '価格は半角英語だけでは登録できない' do
+        @item.price = 'aaaaaa'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price Half-width number', 'Price Out of setting range')
       end
