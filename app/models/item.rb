@@ -6,7 +6,7 @@ class Item < ApplicationRecord
   belongs_to :category
   belongs_to :condition
   belongs_to :fee
-  belongs_to :prefecture 
+  belongs_to :prefecture
   belongs_to :delivery_days
 
   validates :name, :explanation, :price, :image, presence: true
