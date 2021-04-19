@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
   end
 
   def create
+    @item = Item.find(params[:item_id])
     @order_delivery = OrderDelivery.new(order_params)
     if @order_delivery.valid?
       @order_delivery.save
