@@ -7,5 +7,7 @@ FactoryBot.define do
     building { '福岡ハイツ' }
     telephone { '00011112222' }
     token { 'tok_abcdefghijk0000000000000000' }
+    user_id { 1 }
+    item_id { 2 }
   end
 end
